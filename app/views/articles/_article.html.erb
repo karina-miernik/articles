@@ -1,17 +1,27 @@
-<div id="<%= dom_id article %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Title:</strong>
-    <%= article.title %>
-  </p>
+<div id="<%=dom_id article%>" class="shadow-xl my-8 p-4 rounded-lg bg-white">
+  <%=turbo_frame_tag dom_id(article, 'edit') do%>
+  <div>
+      <div class="flex flex-row justify-end gap-4">
+      <%= link_to  edit_article_path(article), class: "flex justify-end w-full mr-auto" do%>
+      <i class="fa-solid fa-pen-fancy text-indigo-400 hover:text-indigo-500 ease-out duration-300 transition cursor-pointer"></i>
+      <%end%>
+      <%= button_to  article_path(article), method: :delete, class: "flex justify-end w-full mr-auto" do%>
+        <i class="fa-solid fa-xmark text-red-400 hover:text-red-500 ease-out duration-300 transition cursor-pointer"></i>
+      <%end%>
+    </div>
+  </div>
+    <p class="my-">
+      <strong class="block font-medium mb-1">Title:</strong>
+      <%= article.title %>
+    </p>
+    
+    <p class="my-4 break-words">
+      <strong class="block font-medium mb-1">Description:</strong>
+      <%= article.description %>
+    </p>
+    <%#= link_to "Show this article", article, class: "rounded-lg py-3 px-5 bg-indigo-300 inline-block font-medium hover:bg-indigo-400 ease-out duration-300 transition" %>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Description:</strong>
-    <%= article.description %>
-  </p>
 
-  <% if action_name != "show" %>
-    <%= link_to "Show this article", article, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this article', edit_article_path(article), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
+  <%end%>
+
 </div>

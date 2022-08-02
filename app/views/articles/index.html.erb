@@ -2,13 +2,19 @@
   <% if notice.present? %>
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
-
+  <h1 class="font-bold text-2xl">Create new article</h1>
+  <div id="new_article" class="rounded-lg mb-20 shadow-xl my-8 p-8 bg-white">
+    <%=render partial: 'articles/form', locals: {article: Article.new}%>
+  </div>
+  <div class="mb-8 font-bold text-lg"><%=Time.zone.now%></div>
   <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Articles</h1>
-    <%= link_to 'New article', new_article_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <h1 class="font-bold text-2xl">Articles</h1>
+    <%=render 'search_form'%>
+    <%#= link_to 'New article', new_article_path, class: "rounded-lg py-3 px-5 bg-indigo-300 hover:bg-indigo-400 transition ease-out duration-300 text-white block font-medium" %>
   </div>
 
-  <div id="articles" class="min-w-full">
-    <%= render @articles %>
+  <div class="min-w-full mb-40">
+    <%#=turbo_stream_from :articles%>
+    <%= render 'articles'%>
   </div>
 </div>

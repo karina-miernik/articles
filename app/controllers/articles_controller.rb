@@ -3,9 +3,19 @@ class ArticlesController < ApplicationController
 
   # GET /articles or /articles.json
   def index
-    @articles = Article.all
+    if params[:title].present?
+      @articles = Article.all.select { |a| a.title.downcase.include? params[:title].downcase }
+    else
+      @articles = Article.all.order(created_at: :desc)
+    end
+    
+    if turbo_frame_request?
+      render partial: "articles", locals: {articles: @articles}
+    else
+      render :index
+    end
   end
-
+  
   # GET /articles/1 or /articles/1.json
   def show
   end
@@ -25,9 +35,20 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
-        format.html { redirect_to article_url(@article), notice: "Article was successfully created." }
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.update('new_article', partial: 'articles/form', locals: {article: Article.new}),
+            turbo_stream.prepend('articles', partial: 'articles/article', locals: {article: @article}),
+          ]
+        end
+        format.html { redirect_to root_path, notice: "Article was successfully created." }
         format.json { render :show, status: :created, location: @article }
       else
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.update('new_article', partial: 'articles/form', locals: {article: @article})
+          ]
+        end
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @article.errors, status: :unprocessable_entity }
       end
@@ -52,7 +73,8 @@ class ArticlesController < ApplicationController
     @article.destroy
 
     respond_to do |format|
-      format.html { redirect_to articles_url, notice: "Article was successfully destroyed." }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@article) }  
+      format.html { redirect_to root_path, notice: "Article was successfully destroyed." }
       format.json { head :no_content }
     end
   end

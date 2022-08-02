@@ -1,6 +1,7 @@
 <%= form_with(model: article, class: "contents") do |form| %>
   <% if article.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+    <div data-controller="alert" id="error_explanation" data-alert-target="container" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <button class="w-full text-right"  data-action="click->alert#close">x</button>
       <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
 
       <ul>
@@ -18,10 +19,10 @@
 
   <div class="my-5">
     <%= form.label :description %>
-    <%= form.text_area :description, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.text_area :description, rows: 2, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-indigo-500 inline-block font-medium hover:bg-indigo-600 ease-out duration-300 transition cursor-pointer text-white" %>
   </div>
 <% end %>
