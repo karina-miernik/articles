@@ -15,8 +15,6 @@
 
   <div class="min-w-full mb-40">
     <%= turbo_stream_from "articles-list" %>
-    <%= turbo_frame_tag "articles-list" do %>
       <%= render 'articles'%>
-    <%end%>
   </div>
 </div>
