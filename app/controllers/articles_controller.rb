@@ -73,7 +73,8 @@ class ArticlesController < ApplicationController
     @article.destroy
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(@article) }  
+      format.turbo_stream 
+      # { render turbo_stream: turbo_stream.remove(@article) }  
       format.html { redirect_to root_path, notice: "Article was successfully destroyed." }
       format.json { head :no_content }
     end

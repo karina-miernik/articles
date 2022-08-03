@@ -1,16 +1,16 @@
 <div id="<%=dom_id article%>" class="shadow-xl my-8 p-4 rounded-lg bg-white">
   <%=turbo_frame_tag dom_id(article, 'edit') do%>
-  <div>
-      <div class="flex flex-row justify-end gap-4">
-      <%= link_to  edit_article_path(article), class: "flex justify-end w-full mr-auto" do%>
-      <i class="fa-solid fa-pen-fancy text-indigo-400 hover:text-indigo-500 ease-out duration-300 transition cursor-pointer"></i>
-      <%end%>
-      <%= button_to  article_path(article), method: :delete, class: "flex justify-end w-full mr-auto" do%>
-        <i class="fa-solid fa-xmark text-red-400 hover:text-red-500 ease-out duration-300 transition cursor-pointer"></i>
-      <%end%>
+    <div>
+        <div class="flex flex-row justify-end gap-4">
+        <%= link_to  edit_article_path(article), class: "flex justify-end w-full mr-auto" do%>
+        <i class="fa-solid fa-pen-fancy text-indigo-400 hover:text-indigo-500 ease-out duration-300 transition cursor-pointer"></i>
+        <%end%>
+        <%= button_to  article_path(article), method: :delete, class: "flex justify-end w-full mr-auto" do%>
+          <i class="fa-solid fa-xmark text-red-400 hover:text-red-500 ease-out duration-300 transition cursor-pointer"></i>
+        <%end%>
+      </div>
     </div>
-  </div>
-    <p class="my-">
+    <p class="my-4">
       <strong class="block font-medium mb-1">Title:</strong>
       <%= article.title %>
     </p>
