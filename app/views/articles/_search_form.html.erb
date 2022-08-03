@@ -1,6 +1,6 @@
 <%# , turbo_action: "advance" %>
 <div class="flex justify-end mb-1">
-  <%= form_with url: articles_path, method: :get, data: {controller: "search", search_target: "form", turbo_frame: "articles-search"}, class: "flex gap-4 flex-row justify-end items-center" do |form| %>
+  <%= form_with url: articles_path, method: :get, data: {controller: "search", turbo_frame: "articles-search"}, class: "flex gap-4 flex-row justify-end items-center" do |form| %>
     <%= form.text_field :title, 
                         placeholder: "Search by title", 
                         value: params[:title], 
