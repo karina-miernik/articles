@@ -5,9 +5,7 @@ export default class extends Controller {
 
   connect() {
   }
-  static targets = ["container"]
-  
   close() {
-    this.containerTarget.remove()
+    this.element.remove()
   }
 }

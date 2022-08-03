@@ -1,7 +1,7 @@
 <%= form_with(model: article, class: "contents") do |form| %>
   <% if article.errors.any? %>
-    <div data-controller="alert" id="error_explanation" data-alert-target="container" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <button class="w-full text-right"  data-action="click->alert#close">x</button>
+    <div data-controller="alert" id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <button class="w-full text-right" data-action="click->alert#close">x</button>
       <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
 
       <ul>
